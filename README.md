@@ -1,6 +1,6 @@
 # API de Usuários
 
-API REST para gerenciamento de usuários, desenvolvida para uso em aplicativos mobile.
+Uma API REST para gerenciamento de usuários em aplicações móveis.
 
 ## Tecnologias Utilizadas
 
@@ -13,12 +13,24 @@ API REST para gerenciamento de usuários, desenvolvida para uso em aplicativos m
 
 ## Instalação
 
-1. Clone o repositório
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/user-api.git
+cd user-api
+```
+
 2. Instale as dependências:
 ```bash
 npm install
 ```
-3. Inicie o servidor:
+
+3. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+```
+PORT=3000
+JWT_SECRET=sua_chave_secreta
+```
+
+4. Inicie o servidor:
 ```bash
 npm run dev
 ```
@@ -29,28 +41,29 @@ A documentação da API está disponível em `/api-docs` quando o servidor estiv
 
 ## Endpoints
 
-- `POST /api/register` - Registro de usuário
-- `POST /api/login` - Login
-- `GET /api/me` - Obter dados do usuário
-- `PUT /api/me` - Atualizar dados do usuário
-- `DELETE /api/users/:id` - Deletar usuário
-- `POST /api/logout` - Logout
+### Autenticação
+
+- `POST /auth/register` - Registro de novo usuário
+- `POST /auth/login` - Login de usuário
+- `POST /auth/logout` - Logout de usuário
+
+### Usuários
+
+- `GET /users/me` - Obter dados do usuário logado
+- `PUT /users/me` - Atualizar dados do usuário
+- `DELETE /users/me` - Deletar usuário
 
 ## Variáveis de Ambiente
 
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
-
-```
-PORT=3000
-NODE_ENV=development
-```
+- `PORT` - Porta em que o servidor irá rodar (padrão: 3000)
+- `JWT_SECRET` - Chave secreta para geração de tokens JWT
 
 ## Deploy
 
-Esta API está configurada para deploy no Render.com. Para fazer o deploy:
+Esta API está configurada para ser facilmente deployada no Render.com:
 
-1. Crie uma conta no [Render](https://render.com)
+1. Crie uma conta no [Render.com](https://render.com)
 2. Crie um novo Web Service
 3. Conecte com seu repositório GitHub
-4. Configure as variáveis de ambiente necessárias
+4. Configure as variáveis de ambiente
 5. Deploy! 
