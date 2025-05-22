@@ -22,12 +22,10 @@ const options = {
   apis: ['./routes/*.js'],
 };
 
-const swaggerSpec = swaggerJsdoc(options);
-
-// Validação básica do swaggerSpec
-if (!swaggerSpec || typeof swaggerSpec !== 'object') {
-  console.error('Erro ao gerar especificação Swagger');
+try {
+  const swaggerSpec = swaggerJsdoc(options);
+  module.exports = swaggerSpec;
+} catch (error) {
+  console.error('Erro ao gerar especificação Swagger:', error);
   process.exit(1);
-}
-
-module.exports = swaggerSpec; 
+} 
