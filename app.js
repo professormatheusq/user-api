@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rotas
-app.use('/api', authRoutes);
+app.use('/auth', authRoutes);
 
 // Rota de health check
 app.get('/health', (req, res) => {
@@ -37,9 +37,9 @@ const PORT = process.env.PORT || 3000;
 
 // Inicialização do servidor
 sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 API pronta em http://localhost:${PORT}`);
-    console.log(`📝 Documentação disponível em http://localhost:${PORT}/api-docs`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 API pronta na porta ${PORT}`);
+    console.log(`📝 Documentação disponível em /api-docs`);
   });
 }).catch(err => {
   console.error('Erro ao conectar ao banco de dados:', err);
