@@ -10,21 +10,24 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:3000',
-        description: 'Servidor de desenvolvimento',
+        url: process.env.NODE_ENV === 'production' 
+          ? 'https://user-api-6z73.onrender.com'
+          : 'http://localhost:3000',
+        description: process.env.NODE_ENV === 'production' 
+          ? 'Servidor de produção'
+          : 'Servidor de desenvolvimento',
       },
     ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
-    },
   },
-  apis: ['./routes/*.js'], // Caminho para os arquivos com as anotações
+  apis: ['./routes/*.js'],
 };
 
-module.exports = swaggerJsdoc(options); 
+const swaggerSpec = swaggerJsdoc(options);
+
+// Validação básica do swaggerSpec
+if (!swaggerSpec || typeof swaggerSpec !== 'object') {
+  console.error('Erro ao gerar especificação Swagger');
+  process.exit(1);
+}
+
+module.exports = swaggerSpec; 
